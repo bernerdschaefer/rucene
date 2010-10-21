@@ -1,0 +1,34 @@
+.speaker
+  %form(action="/" method="post")
+    %fieldset
+      %input(type="hidden" name="id" value="#{settings.current_index + 1}")
+      %label(for="speaker") Speaker
+      %input(id="speaker" name="speaker" type="text")
+
+      %label(for="title") Title
+      %input(id="title" name="title" type="text")
+
+      %label(for="bio") Bio
+      %textarea(id="bio" name="bio")
+
+      %label(for="abstract") Abstract
+      %textarea(id="abstract" name="abstract")
+
+    %input(type="Submit")
+
+.speakers
+  %h2 Speakers
+  %form
+    %select(name="field")
+      %option{:selected => params["field"] == 'speaker'} speaker
+      %option{:selected => params["field"] == 'title'} title
+      %option{:selected => params["field"] == 'bio'} bio
+      %option{:selected => params["field"] == 'abstract'} abstract
+    %input(type="search" name="term" value="#{params['term']}")
+    %a(href="/") clear
+
+  - @speakers.each do |speaker|
+    %h3= speaker["title"]
+    %h4= speaker["speaker"]
+    %p= speaker["abstract"]
+
